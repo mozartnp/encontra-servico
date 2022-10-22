@@ -1,6 +1,8 @@
 from pathlib import Path
 from decouple import Csv, config
 
+from django.urls import reverse_lazy
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -101,3 +103,7 @@ STATIC_URL = 'static/'
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Default model of User
+AUTH_USER_MODEL = 'custom_user.CustomUser'
+# LOGIN_REDIRECT_URL = reverse_lazy('core:team_choice')
