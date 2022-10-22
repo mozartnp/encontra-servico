@@ -24,7 +24,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # 3 Party Apps
+    'widget_tweaks',
+
     # System Apps
+    'backend.apps.core',
     'backend.apps.custom_user',
 ]
 
