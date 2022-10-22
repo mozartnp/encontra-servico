@@ -8,13 +8,16 @@ class CustomUserManager(BaseUserManager):
     '''
     Class to create a user
     '''
-    def create_user(self, username, password=None):
+    def create_user(self, username, is_client, password=None):
         if not username:
             raise ValueError("Username is required.")
+        if not is_client:
+            raise ValueError("is_client is required.")
 
         user = self.model(
             username = username,
             collaborator = collaborator,
+            is_client = is_client,
         )
 
         user.set_password(password)
@@ -22,13 +25,16 @@ class CustomUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, username, password):
+    def create_superuser(self, username, password, is_client):
         if not username:
             raise ValueError("Username is required.")
+        if not is_client:
+            raise ValueError("is_client is required.")
 
         user = self.model(
             username = username,
             password = password,
+            is_client = is_client,
         )
 
         user.is_admin = True
@@ -45,6 +51,7 @@ class CustomUser(AbstractBaseUser):
     '''
     id_user = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     username = models.CharField(max_length=254, unique=True)
+    is_client = models.BooleanField(help_text="If true is a client, if false is a company")
 
     date_joined = models.DateTimeField(auto_now_add=True)
     last_login = models.DateTimeField(auto_now=True)
@@ -54,6 +61,7 @@ class CustomUser(AbstractBaseUser):
     is_superuser = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['is_client',]
 
     objects = CustomUserManager()
 
