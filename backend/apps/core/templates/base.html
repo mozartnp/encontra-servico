@@ -11,11 +11,13 @@
         <title>{% block title %}{% endblock title %}</title>
 
         {% block extra_style %}{% endblock extra_style %}
+        <link rel="stylesheet" href="{% static '/style/_topo.css' %}">
         <link rel="stylesheet" href="{% static '/style/style.css' %}"/>
         <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     </head>
 
     <body>
+        {% include 'user/_topo.html' %}
         {% block content %}{% endblock content %}
         <!-- Script-->
         {% block extra_script %}{% endblock extra_script %}
