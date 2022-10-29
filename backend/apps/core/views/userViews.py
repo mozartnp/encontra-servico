@@ -1,5 +1,6 @@
 from django.contrib.auth.views import LoginView
 from django.http import HttpResponseRedirect
+from django.shortcuts import render
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
 
@@ -37,3 +38,10 @@ class CreateUserCreateView(CreateView):
             # return reverse_lazy('patient:patient_list') #TODO
 
         return reverse_lazy('core:login_custom')
+
+
+
+
+
+def teste(request):
+    return render (request, 'user/teste.html')
