@@ -1,5 +1,9 @@
 {% load static %}
 
+{% block extra_style %}
+<link rel="stylesheet" href="{% static '/style/_topo.css' %}">
+{% endblock %}
+
 <div class="containerTopo">
     <div class="text-center">
         <img src="{% static 'assets/logo3.png' %}" class="img-fluid" alt="Imagem responsiva">

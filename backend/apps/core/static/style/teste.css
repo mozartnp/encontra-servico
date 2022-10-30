@@ -1,0 +1,12 @@
+.container{
+    padding: 20px;
+}
+.list-group {
+     padding: 15px, 15px; 
+}
+#a{
+    font-size: 25px;
+}
+.badge{
+    color: black;
+}
