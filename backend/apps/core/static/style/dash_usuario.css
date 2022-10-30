@@ -1,0 +1,15 @@
+.container{
+    padding: 20px;
+}
+#a{
+    font-size: 25px;
+}
+.list-group{
+    font-size: 25px;
+    padding: 30px;
+}
+.list-group-item{
+    padding: 50px;
+    --bs-list-group-item-padding-y: 2rem;
+
+}

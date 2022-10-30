@@ -44,4 +44,4 @@ class CreateUserCreateView(CreateView):
 
 
 def teste(request):
-    return render (request, 'user/teste.html')
+    return render (request, 'user/dash_usuario.html')

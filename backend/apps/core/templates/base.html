@@ -17,7 +17,11 @@
 
     <body>
         {% include 'user/_topo.html' %}
+        
         {% block content %}{% endblock content %}
+
+        {% include 'user/_footer.html' %}
+
         <!-- Script-->
         {% block extra_script %}{% endblock extra_script %}
         <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
