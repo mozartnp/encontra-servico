@@ -22,4 +22,4 @@ class EmpresaModel(models.Model):
     cep = models.CharField(null=True, max_length=8)
 
     def __str__(self):
-        return f"Company: {self.user}"
+        return f"Company: {self.nome_fantasia}"

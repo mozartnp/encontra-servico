@@ -41,7 +41,7 @@ class CreateUserCreateView(CreateView):
             if self.request.user.is_client:
                 return HttpResponseRedirect(reverse_lazy('core:criando_cliente'))
             elif not self.request.user.is_client:
-                print('É empresa')
+                return HttpResponseRedirect(reverse_lazy('core:criando_empresa'))
 
         return super().dispatch(request, *args, **kwargs)
 
@@ -54,7 +54,6 @@ class CreateUserCreateView(CreateView):
         if self.object.is_client:
             return reverse_lazy('core:criando_cliente')
         elif not self.object.is_client:
-            print('É empresa')
-            # return reverse_lazy('patient:patient_list') #TODO
+            return reverse_lazy('core:criando_empresa')
 
         return reverse_lazy('core:login_custom')

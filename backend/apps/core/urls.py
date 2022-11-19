@@ -4,7 +4,7 @@ from django.views.generic.base import RedirectView
 
 from backend.apps.core.views.dashboardViews import DashboardDetailView
 from backend.apps.core.views.userViews import LoginCustomView, CreateUserCreateView
-from backend.apps.core.views.pessoasViews import CreateClienteCreateView
+from backend.apps.core.views.pessoasViews import CreateClienteCreateView, CreateEmpresaCreateView
 
 app_name = 'core'
 
@@ -16,6 +16,7 @@ urlpatterns = [
     path('create_user/', CreateUserCreateView.as_view(), name='create_user'),
 
     path('criando_cliente/', CreateClienteCreateView.as_view(), name='criando_cliente'),
+    path('criando_empresa/', CreateEmpresaCreateView.as_view(), name='criando_empresa'),
 
     path('dashboard/', DashboardDetailView.as_view(), name='dashboard')
 ]
