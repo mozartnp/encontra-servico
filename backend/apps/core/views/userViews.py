@@ -1,3 +1,4 @@
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import LoginView
 from django.http import HttpResponseRedirect
 from django.views.generic import CreateView
@@ -14,7 +15,7 @@ class LoginCustomView(LoginView):
 
     def dispatch(self, request, *args, **kwargs):
         if self.request.user.is_authenticated:
-            return HttpResponseRedirect(self.success_url)
+            return HttpResponseRedirect(reverse_lazy('core:create_user'))
         return super().dispatch(request, *args, **kwargs)
 
 class CreateUserCreateView(CreateView):
@@ -25,13 +26,33 @@ class CreateUserCreateView(CreateView):
     template_name = 'user/create_user.html'
     form_class = CreateUserForms
 
+    def dispatch(self, request, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            try:
+                self.request.user.user_company
+                return HttpResponseRedirect(reverse_lazy('core:dashboard'))
+            except:
+                pass
+            try:
+                self.request.user.user_client
+                return HttpResponseRedirect(reverse_lazy('core:dashboard'))
+            except:
+                pass
+            if self.request.user.is_client:
+                return HttpResponseRedirect(reverse_lazy('core:criando_cliente'))
+            elif not self.request.user.is_client:
+                print('É empresa')
+
+        return super().dispatch(request, *args, **kwargs)
+
     def get_success_url(self):
         '''
         Define o redirect dependendo do tipo de usuário.
         '''
+        user = authenticate(self.request, username=self.request.POST['username'], password=self.request.POST['password1'])
+        login(self.request, user)
         if self.object.is_client:
-            print('É cliente')
-            # return reverse_lazy('patient:doctor_list') #TODO
+            return reverse_lazy('core:criando_cliente')
         elif not self.object.is_client:
             print('É empresa')
             # return reverse_lazy('patient:patient_list') #TODO

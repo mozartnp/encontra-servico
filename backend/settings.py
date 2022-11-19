@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     # System Apps
     'backend.apps.core',
     'backend.apps.custom_user',
+    'backend.apps.pessoas'
 ]
 
 MIDDLEWARE = [
@@ -110,4 +111,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Default model of User
 AUTH_USER_MODEL = 'custom_user.CustomUser'
-# LOGIN_REDIRECT_URL = reverse_lazy('core:team_choice')
+LOGIN_REDIRECT_URL = reverse_lazy('core:criando_cliente')
