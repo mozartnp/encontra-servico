@@ -2,7 +2,7 @@ from django.contrib.auth.views import LogoutView
 from django.urls import path, reverse_lazy
 from django.views.generic.base import RedirectView
 
-from backend.apps.core.views.dashboardViews import DashboardDetailView
+from backend.apps.core.views.dashboardViews import DashboardDetailView, ListCompanyListView
 from backend.apps.core.views.userViews import LoginCustomView, CreateUserCreateView
 from backend.apps.core.views.pessoasViews import CreateClienteCreateView, CreateEmpresaCreateView
 
@@ -18,5 +18,6 @@ urlpatterns = [
     path('criando_cliente/', CreateClienteCreateView.as_view(), name='criando_cliente'),
     path('criando_empresa/', CreateEmpresaCreateView.as_view(), name='criando_empresa'),
 
-    path('dashboard/', DashboardDetailView.as_view(), name='dashboard')
+    path('dashboard/', DashboardDetailView.as_view(), name='dashboard'),
+    path('lista_empresas/<str:categoria>/', ListCompanyListView.as_view(), name='lista_empresas')
 ]

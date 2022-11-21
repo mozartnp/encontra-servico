@@ -8,7 +8,7 @@ class CreateClienteForm(forms.ModelForm):
         model = ClienteModel
         fields = [
             'nome', 'cpf', 'email', 'telefone1', 'telefone2',
-            'logradouro', 'numero', 'complemento', 'bairo', 'cidade',
+            'logradouro', 'numero', 'complemento', 'bairro', 'cidade',
             'estado', 'pais', 'cep'
         ]
         labels = {
@@ -20,7 +20,7 @@ class CreateClienteForm(forms.ModelForm):
             'logradouro' : "Logradouro",
             'numero' : "Numero",
             'complemento' : "Complemento",
-            'bairo' : "Bairo",
+            'bairro' : "bairro",
             'cidade' : "Cidade",
             'estado' : "Estado",
             'pais': "País",
@@ -68,9 +68,9 @@ class CreateClienteForm(forms.ModelForm):
                     'placeholder': 'Perto do Posto',
                 }
             ),
-            'bairo' : forms.TextInput(
+            'bairro' : forms.TextInput(
                 attrs={
-                    'placeholder': 'Bairo do sonho',
+                    'placeholder': 'bairro do sonho',
                 }
             ),
             'cidade' : forms.TextInput(
@@ -101,7 +101,7 @@ class CreateClienteForm(forms.ModelForm):
         self.fields['logradouro'].required = False
         self.fields['numero'].required = False
         self.fields['complemento'].required = False
-        self.fields['bairo'].required = False
+        self.fields['bairro'].required = False
         self.fields['cidade'].required = False
         self.fields['estado'].required = False
         self.fields['pais'].required = False

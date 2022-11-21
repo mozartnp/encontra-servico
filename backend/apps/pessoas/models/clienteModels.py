@@ -12,7 +12,7 @@ class ClienteModel(models.Model):
     logradouro = models.CharField(null=True, max_length=224)
     numero = models.CharField(null=True, max_length=20)
     complemento = models.CharField(null=True, max_length=224)
-    bairo = models.CharField(null=True, max_length=224)
+    bairro = models.CharField(null=True, max_length=224)
     cidade = models.CharField(null=True, max_length=224)
     estado = models.CharField(null=True, max_length=224)
     pais = models.CharField(null=True, max_length=224)

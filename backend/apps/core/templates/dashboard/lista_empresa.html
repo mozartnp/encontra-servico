@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load widget_tweaks %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<main>
+
+    <div class="container">
+        <div class="col-lg-9 offset-lg-1">
+            <section>
+                <h3 class="text-center">Lista de prestadores</h3>
+                <hr>
+            </section>
+
+            <section class="row">
+                <div class="card-group ">
+                    {% for object in object_list%}
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Empresa: {{ object.nome_fantasia }} </h5>
+                                    <p class="card-text">
+                                        <strong>Categoria:</strong> {{ object.categoria }}
+                                        <br>
+                                        <strong>Telefone1:</strong> {{ object.telefone1 }}
+                                        <br>
+                                        <strong>Telefone2:</strong> {{ object.telefone2 }}
+                                        <br>
+                                        <strong>Email:</strong> {{ object.email }}
+                                    </p>
+                                    <p class="card-text">
+                                        <strong>Sobre a empresa:</strong> {{ object.complemento }}
+
+                                    </p>
+                                    <p class="card-text">
+                                        <strong>Estado:</strong> {{ object.estado }}
+                                        <br>
+                                        <strong>Cidade:</strong> {{ object.cidade }}
+                                        <br>
+                                        <strong>Bairro:</strong> {{ object.bairro }}
+                                        <br>
+                                        <strong>Logradouro:</strong> {{ object.logradouro }}
+                                        <br>
+                                        <strong>Numero:</strong> {{ object.numero }}
+                                        <br>
+                                    </p>    
+                                </div>
+                            </div>
+                    </div>
+                        
+                    {% endfor %}
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+</main>
+
+{% endblock %}

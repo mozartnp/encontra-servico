@@ -21,7 +21,6 @@ class CreateClienteCreateView(CreateView):
         context = self.get_context_data(**kwargs)
         cliente = form.save(commit=False)
         custom_user = CustomUser.objects.filter(pk=self.request.user.pk).first()
-        print(custom_user)
         cliente.user = self.request.user
         cliente.save()
         return super().form_valid(form)
@@ -40,8 +39,6 @@ class CreateEmpresaCreateView(CreateView):
         context = self.get_context_data(**kwargs)
         cliente = form.save(commit=False)
         custom_user = CustomUser.objects.filter(pk=self.request.user.pk).first()
-        print(custom_user)
         cliente.user = self.request.user
         cliente.save()
         return super().form_valid(form)
-

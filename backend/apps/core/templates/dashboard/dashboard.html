@@ -4,7 +4,7 @@
 
 {% load widget_tweaks %}
 
-{% block title %}Create User{% endblock %}
+{% block title %}Dashboard{% endblock %}
 
 {% block content %}
 
@@ -12,9 +12,53 @@
 
     <div class="container">
         <div class="col-lg-9 offset-lg-1">
-            {{ object }}
-            <h1>oi</h1>
+            {% if object.user.is_client %}
+                <section>
+                    <h3 class="text-center">Seja bem vindo: <strong>{{ object.nome }}</strong></h3>
+                    <hr>
+                </section>
+                <section>
+                    <form method="post" class="row justify-content-center">
+                        {% csrf_token %}
+                        <label>Escolha uma categoria</label>
+                        <select name="categoria" class="js-select2 form-control col-sm-6" required id="id_title" autocomplete="off">
+                            {% for categoria in categorias %}
+                                <option value="{{ categoria.0 }}">{{ categoria.0 }}</option>
+                            {% endfor %}
+                        </select>
+                        <div class="col-sm-5 botaoVerde">
+                            <button class="w-100 btn btn-outline-success" type="submit">Pesquisar</button>
+                        </div> 
+                    </form>
+                </section>
 
+            {% elif not object.user.is_client %}
+                <section class="text-center">
+                    <h3 >Seja bem vindo administrador da: <strong>{{ object.nome_fantasia }}</strong></h3>
+                    <hr>
+                </section>
+
+                <section class="text-center">
+                    <h3>Suas informações</h3>
+                    <h5>Nome Fantasia: <strong>{{ object.nome_fantasia }}</strong></h5>
+                    <h5>Razão Social: <strong>{{ object.razao_social }}</strong></h5>
+                    <h5>CNPJ: <strong>{{ object.cnpj }}</strong></h5>
+                    <h5>IE: <strong>{{ object.ie }}</strong></h5>
+                    <h5>E-mail: <strong>{{ object.email }}</strong></h5>
+                    <h5>Telefone 1: <strong>{{ object.telefone1 }}</strong></h5>
+                    <h5>Telefone 2: <strong>{{ object.telefone2 }}</strong></h5>
+                    <h5>Logradouro: <strong>{{ object.logradouro }}</strong></h5>
+                    <h5>Numero: <strong>{{ object.numero }}</strong></h5>
+                    <h5>Bairro: <strong>{{ object.bairro }}</strong></h5>
+                    <h5>Cidade: <strong>{{ object.cidade }}</strong></h5>
+                    <h5>Estado: <strong>{{ object.estado }}</strong></h5>
+                    <h5>País: <strong>{{ object.pais }}</strong></h5>
+                    <h5>CEP: <strong>{{ object.cep }}</strong></h5>
+                    <h5>categoria: <strong>{{ object.categoria }}</strong></h5>
+                    <h5>Sobre Nos: <strong>{{ object.complemento }}</strong></h5>
+                </section>
+
+            {% endif %}
         </div>
     </div>
 
