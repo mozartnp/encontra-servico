@@ -17,6 +17,10 @@
                 <hr>
             </section>
 
+            <section class="text-end">
+                <a href="{% url 'core:logout_custom' %}"><small>Logout</small></a>
+            </section>
+
             <section class="row">
                 <div class="card-group ">
                     {% for object in object_list%}

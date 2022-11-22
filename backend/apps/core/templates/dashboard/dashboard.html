@@ -17,6 +17,11 @@
                     <h3 class="text-center">Seja bem vindo: <strong>{{ object.nome }}</strong></h3>
                     <hr>
                 </section>
+
+                <section class="text-end">
+                    <a href="{% url 'core:logout_custom' %}"><small>Logout</small></a>
+                </section>
+                
                 <section>
                     <form method="post" class="row justify-content-center">
                         {% csrf_token %}
@@ -36,6 +41,10 @@
                 <section class="text-center">
                     <h3 >Seja bem vindo administrador da: <strong>{{ object.nome_fantasia }}</strong></h3>
                     <hr>
+                </section>
+
+                <section class="text-end">
+                    <a href="{% url 'core:logout_custom' %}"><small>Logout</small></a>
                 </section>
 
                 <section class="text-center">
