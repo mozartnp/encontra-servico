@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
 
@@ -16,6 +17,21 @@ class CreateClienteCreateView(CreateView):
     form_class = CreateClienteForm
     success_url = reverse_lazy('core:dashboard')
 
+    def dispatch(self, request, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            if self.request.user.is_client:
+                if self.request.user.user_client:
+                    return HttpResponseRedirect(reverse_lazy('core:dashboard'))
+                else:
+                    return HttpResponseRedirect(reverse_lazy('core:criando_cliente'))
+            else:
+                if self.request.user.user_company:
+                    return HttpResponseRedirect(reverse_lazy('core:dashboard'))
+                else: 
+                    return HttpResponseRedirect(reverse_lazy('core:criando_empresa'))
+        else:
+            return HttpResponseRedirect(reverse_lazy('core:login'))
+
     def form_valid(self, form, **kwargs):
 
         context = self.get_context_data(**kwargs)
@@ -33,6 +49,21 @@ class CreateEmpresaCreateView(CreateView):
     template_name = 'user/create_user.html'
     form_class = CreateEmpresaForm
     success_url = reverse_lazy('core:dashboard')
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            if self.request.user.is_client:
+                if self.request.user.user_client:
+                    return HttpResponseRedirect(reverse_lazy('core:dashboard'))
+                else:
+                    return HttpResponseRedirect(reverse_lazy('core:criando_cliente'))
+            else:
+                if self.request.user.user_company:
+                    return HttpResponseRedirect(reverse_lazy('core:dashboard'))
+                else: 
+                    return HttpResponseRedirect(reverse_lazy('core:criando_empresa'))
+        else:
+            return HttpResponseRedirect(reverse_lazy('core:login'))
 
     def form_valid(self, form, **kwargs):
 
