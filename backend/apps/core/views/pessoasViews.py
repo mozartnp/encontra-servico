@@ -19,16 +19,24 @@ class CreateClienteCreateView(CreateView):
 
     def dispatch(self, request, *args, **kwargs):
         if self.request.user.is_authenticated:
-            if self.request.user.is_client:
-                if self.request.user.user_client:
-                    return HttpResponseRedirect(reverse_lazy('core:dashboard'))
-                else:
-                    return HttpResponseRedirect(reverse_lazy('core:criando_cliente'))
-            else:
-                if self.request.user.user_company:
-                    return HttpResponseRedirect(reverse_lazy('core:dashboard'))
-                else: 
-                    return HttpResponseRedirect(reverse_lazy('core:criando_empresa'))
+            vali_client = True
+            vali_empresa = True
+
+            try:
+                self.request.user.user_client
+            except:
+                vali_client = False
+            try:
+                self.request.user.user_company
+            except:
+                vali_empresa = False
+            
+            if vali_client or vali_empresa:
+                return HttpResponseRedirect(reverse_lazy('core:dashboard'))
+            elif self.request.user.is_client:
+                return super().dispatch(request, *args, **kwargs)
+            elif not self.request.user.is_client:
+                return HttpResponseRedirect(reverse_lazy('core:criando_empresa'))
         else:
             return HttpResponseRedirect(reverse_lazy('core:login'))
 
@@ -52,16 +60,24 @@ class CreateEmpresaCreateView(CreateView):
 
     def dispatch(self, request, *args, **kwargs):
         if self.request.user.is_authenticated:
-            if self.request.user.is_client:
-                if self.request.user.user_client:
-                    return HttpResponseRedirect(reverse_lazy('core:dashboard'))
-                else:
-                    return HttpResponseRedirect(reverse_lazy('core:criando_cliente'))
-            else:
-                if self.request.user.user_company:
-                    return HttpResponseRedirect(reverse_lazy('core:dashboard'))
-                else: 
-                    return HttpResponseRedirect(reverse_lazy('core:criando_empresa'))
+            vali_client = True
+            vali_empresa = True
+
+            try:
+                self.request.user.user_client
+            except:
+                vali_client = False
+            try:
+                self.request.user.user_company
+            except:
+                vali_empresa = False
+            
+            if vali_client or vali_empresa:
+                return HttpResponseRedirect(reverse_lazy('core:dashboard'))
+            elif self.request.user.is_client:
+                return HttpResponseRedirect(reverse_lazy('core:criando_cliente'))
+            elif not self.request.user.is_client:
+                return super().dispatch(request, *args, **kwargs)
         else:
             return HttpResponseRedirect(reverse_lazy('core:login'))
 
